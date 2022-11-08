@@ -111,20 +111,28 @@ void moTaiKhoan() {
   client = getListClient();
 }
 void xuatTT(CLIENT& p){
-
-  cout<<"So tai khoan: "<<p.maSoThe<<endl;
-  cout<<"Ten dang nhap: "<<p.taiKhoan<<endl;
-  cout<<"Ho va ten: "<<p.hoTen<<endl;
-  cout<<"So dien thoai: "<<p.soDienThoai<<endl;
-  cout<<"So can cuoc cong dan: "<<p.cccd<<endl;
-  cout << "Dia chi: " << p.diaChi << endl;
-  cout << "Ngay sinh: " << p.ngaySinh << endl; 
-  cout << "Email: " << p.email << endl;
+  cout<<"                 THONG TIN TAI KHOAN                  " << endl;
+  cout<<"+------------------------------------------------------+" << endl; 
+  cout<<"|  So tai khoan: "<< setw(36) << p.maSoThe       << "  |" << endl; 
+  cout<<"|  Ten dang nhap: "<< setw(35) << p.taiKhoan     << "  |" << endl;
+  cout<<"|  Ho va ten: " << setw(39) <<p.hoTen            << "  |" << endl;
+  cout<<"|  So dien thoai: "<< setw(35) << p.soDienThoai  << "  |" << endl;
+  cout<<"|  So can cuoc cong dan: "<< setw(28) << p.cccd  << "  |" << endl;
+  cout<<"|  Dia chi: " << setw(41) << p.diaChi            << "  |" << endl;
+  cout<<"|  Ngay sinh: " << setw(39) << p.ngaySinh        << "  |" << endl; 
+  cout<<"|  Email: " << setw(43) << p.email               << "  |" << endl;
+  cout<<"+------------------------------------------------------+" << endl; 
   
 } 
 
 void xuatSodu(CLIENT& a){
-  cout<<"So du hien tai: "<<a.soDuTaiKhoan<<endl;
+  cout << "+-----------------------------------------------------------------+" << endl;
+  cout << "| SO TAI KHOAN   | TEN TAI KHOAN              | SO DU HIEN TAI    |" << endl;
+  cout << "|-----------------------------------------------------------------|" << endl;
+  cout << "| " << setw(14) << left <<a.maSoThe << " | " << setw(26) << left << a.hoTen <<" | " << setw(17) << left << a.soDuTaiKhoan << " |" << endl;	
+  cout << "+-----------------------------------------------------------------+" << endl;
+  
+  
 }
 
 void chuyenkhoan(CLIENT& a){
