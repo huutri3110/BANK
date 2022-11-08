@@ -26,6 +26,7 @@ void moTaiKhoan(); //Yeu cau nhap thong tin roi luu thong tin vao file
 CLIENT* getListClient();//Lay du lieu trong file va tra ve mang du lieu
 void saveListClient(CLIENT* client);//luu du lieu vao file
 void showListClient(CLIENT* client);
+bool confirmMessage (); 
 
 
 
@@ -148,20 +149,31 @@ void chuyenkhoan(CLIENT& a){
     cout<<"Nhap so tien muon chuyen: "; cin >>tien;
     if(tien>a.soDuTaiKhoan) cout<<"So du khong du de chuyen, vui long nhap so du nho hon "<<a.soDuTaiKhoan<<endl;
   } while (tien>a.soDuTaiKhoan);
-  cout<<"Giao dich dang xu li. Giao dich thanh cong!";
-  a.soDuTaiKhoan-=tien;
-  client[x].soDuTaiKhoan += tien;
-  saveListClient(client);
-  client = getListClient();
+  
+  if (confirmMessage() ) {
+  	a.soDuTaiKhoan-=tien;
+  	client[x].soDuTaiKhoan += tien;
+  	saveListClient(client);
+  	client = getListClient();
+  } else {
+  	return;
+  }
+  
+  
 }
 
 void napTien(CLIENT& a){
   double tien;
   cout<<"Nhap so tien muon nap: "; cin>>tien;
-  a.soDuTaiKhoan+=tien;
-  cout<<"Ban da nap thanh cong! So du hien tai la: "<<a.soDuTaiKhoan<<endl;
-  saveListClient(client);
-  client = getListClient();
+  if (confirmMessage() ) {
+  	a.soDuTaiKhoan+=tien;
+  	cout<<"Ban da nap thanh cong! So du hien tai la: "<<a.soDuTaiKhoan<<endl;
+  	saveListClient(client);
+  	client = getListClient();
+  }	else {
+  	return;
+  }
+  
 }
 
 void rutTien(CLIENT& a){
@@ -171,10 +183,15 @@ void rutTien(CLIENT& a){
     cout<<"Nhap so tien muon rut: "; cin >>tien;
     if(tien>a.soDuTaiKhoan) cout<<"So du khong du de rut, vui long nhap so du nho hon "<<a.soDuTaiKhoan<<endl;
   } while (tien>a.soDuTaiKhoan);
-  a.soDuTaiKhoan-=tien;
-  cout<<"Ban da rut thanh cong! So du hien tai la: "<<a.soDuTaiKhoan<<endl;
-  saveListClient(client);
-  client = getListClient();
+  if (confirmMessage() ) {
+  	a.soDuTaiKhoan-=tien;
+  	cout<<"Ban da rut thanh cong! So du hien tai la: "<<a.soDuTaiKhoan<<endl;
+  	saveListClient(client);
+  	client = getListClient();
+  } else {
+  	return;
+  }
+  
 }
 
 void dichvuThe(CLIENT& a){
@@ -311,6 +328,24 @@ void inSodu(long long a ){
    }
    cout<<endl;
   }
+}
+
+bool confirmMessage () {
+	system("cls");
+	cout << "------------------------------" << endl;
+	cout << "=!!!  Xac nhan giao dich!!!  =" << endl;
+	cout << "------------------------------" << endl;
+	cout << "\n";
+	cout << "1: Xac nhan" << endl;
+	cout << "0: Tu choi" << endl;
+	
+	bool select;
+	cin >> select;
+	
+	system("cls");
+	
+	if (select == 1)	return 1;
+	else 				return 0;
 }
 
 #endif
