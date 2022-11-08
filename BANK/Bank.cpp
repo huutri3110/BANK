@@ -18,18 +18,23 @@ void menu_main(){
     do
     {
     	system("cls");
-    	cout <<"          \n                        Welcome to T.V Bank- Bank of VietNam"<<endl;
-        cout<<"\n1.Dang Nhap"<<endl;
-        cout<<"2.Dang ki tai khoan"<<endl;
-        cout<<"3.Lien he dich vu CSKH"<<endl;
-        cout<<"0.Thoat ngan hang"<<endl;
-        cout<<"Nhap lua chon cua ban: "; cin>>s;
+    	cout <<"********************************************************************" << endl;
+    	cout <<"***********                                          ***************" << endl;
+    	cout <<"***********   Welcome to T.V Bank- Bank of VietNam   ***************"<<endl;
+    	cout <<"***********                                          ***************" << endl;
+    	cout <<"********************************************************************" << endl;
+    	cout << "\n";
+        cout<<"  1.Dang Nhap"<<endl;
+        cout<<"  2.Dang ki tai khoan"<<endl;
+        cout<<"  3.Lien he dich vu CSKH"<<endl;
+        cout<<"  0.Thoat ngan hang"<<endl;
+        cout<<"  Nhap lua chon cua ban: "; cin>>s;
         
         switch (s)
         {
         case 1:
             cout<<endl;
-            system("cls");
+            
             vt = log_in();
             cout << vt;
             
