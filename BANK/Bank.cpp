@@ -19,9 +19,9 @@ void menu_main(){
     {
     	system("cls");
     	cout <<"********************************************************************" << endl;
-    	cout <<"***********                                          ***************" << endl;
-    	cout <<"***********   Welcome to T.V Bank- Bank of VietNam   ***************"<<endl;
-    	cout <<"***********                                          ***************" << endl;
+    	cout <<"****                                                            ****" << endl;
+    	cout <<"****         Welcome to T.V Bank- Bank of VietNam               ****" << endl;
+    	cout <<"****                                                            ****" << endl;
     	cout <<"********************************************************************" << endl;
     	cout << "\n";
         cout<<"  1.Dang Nhap"<<endl;
@@ -43,14 +43,20 @@ void menu_main(){
         		do
         		{
         	system("cls");
-            cout<<"\n1.Thong tin tai khoan."<<endl;;
-            cout<<"2.So du tai khoan."<<endl;
-            cout<<"3.Chuyen khoan"<<endl;
-            cout<<"4.Nap tien."<<endl;
-            cout<<"5.Rut tien."<<endl;
-            cout<<"6.Cac dich vu lien quan den the."<<endl;
-            cout<<"7.Cac dich vu khac (Thanh toan hoa don, Tien dien, Tien nuoc,...)"<<endl;
-            cout <<"0.Dang Xuat" << endl;
+        	
+        	cout <<"********************************************************************" << endl;
+    		cout <<"****                                                            ****" << endl;
+        	cout <<"****                 Welcome" << " " << setw(35) << left << client[vt].hoTen << "****" << endl;
+    		cout <<"****                                                            ****" << endl;
+    		cout <<"********************************************************************" << endl;
+            cout<<"\n  1.Thong tin tai khoan."<<endl;;
+            cout<<"  2.So du tai khoan."<<endl;
+            cout<<"  3.Chuyen khoan"<<endl;
+            cout<<"  4.Nap tien."<<endl;
+            cout<<"  5.Rut tien."<<endl;
+            cout<<"  6.Cac dich vu lien quan den the."<<endl;
+            cout<<"  7.Cac dich vu khac (Thanh toan hoa don, Tien dien, Tien nuoc,...)"<<endl;
+            cout<<"  0.Dang Xuat" << endl;
 			cin >> s; 
             switch (s)
             {
@@ -87,7 +93,7 @@ void menu_main(){
           }
         } while(s);
 			} else {
-				cout<<"Tai khoan va mat khau chua chinh xac! Vui long nhap lai!"<<endl;
+				cout<<"\n\nTai khoan va mat khau chua chinh xac! Vui long nhap lai!"<<endl;
 				system("pause");
 			}
             
