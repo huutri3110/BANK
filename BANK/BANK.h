@@ -32,13 +32,13 @@ class CLIENT {
 public:
   int idd;
   int maSoThe;
-  char hoTen[256];
-  char diaChi[256];
-  char soDienThoai[256];
-  char cccd[256];
-  double soDuTaiKhoan;
-  char taiKhoan[256];
-  char matKhau[256];
+  string hoTen;
+  string diaChi;
+  string soDienThoai;
+  string cccd;
+  long long soDuTaiKhoan;
+  string taiKhoan;
+  string matKhau;
 public:
   friend istream &operator>>(istream &is, CLIENT &p) {
     fflush(stdin);
@@ -75,6 +75,10 @@ public:
 
 CLIENT* client;
 
+
+
+
+
 void moTaiKhoan() {
   id++; 
   number++;
@@ -94,16 +98,53 @@ void xuatTT(CLIENT& a){
   cout<<"So dien thoai: "<<a.soDienThoai<<endl;
   cout<<"So tai khoan: "<<a.maSoThe<<endl;
   cout<<"So can cuoc cong dan: "<<a.cccd<<endl;
-} 
+}
+
+void inSodu(long long a ){
+  long long n=a;
+  int d=0;
+  while (n>0)
+  {
+    n/=10;
+    d++;
+  }
+  int arr[d+1];
+  n=a;
+  for (int i = 1; i <= d; i++) {
+    arr[i]=n%10;
+    n/=10;
+  }
+  if(d%3==0){
+    for (int i = 1; i <= d; i++)
+   {
+     cout<<arr[d-i+1];
+     if(i%3==0 && i<d) cout<<".";
+   }
+  }
+  else{
+    for (int i = d; i > d-d%3; i--){
+      cout<<arr[i];
+    }
+    cout<<".";
+    int t=d-d%3;
+     for (int i = 1; i <= t; i++)
+   {
+     cout<<arr[t-i+1];
+     if(i%3==0 && i< t) cout<<".";
+   }
+  }
+  cout<<" VND";
+   cout<<endl;
+}
 
 void xuatSodu(CLIENT& a){
-  cout<<"So du hien tai: "<<a.soDuTaiKhoan<<endl;
+  cout<<"So du hien tai: "; inSodu(a.soDuTaiKhoan);
 }
 
 void chuyenkhoan(CLIENT& a){
   char bank[256];
   int stk;
-  double tien;
+  long long tien;
   cout<<"Chon ngan hang ban muon chuyen toi: "; 
   fflush(stdin);
   cin.getline(bank,256);
@@ -120,33 +161,34 @@ void chuyenkhoan(CLIENT& a){
   do
   {
     cout<<"Nhap so tien muon chuyen: "; cin >>tien;
-    if(tien>a.soDuTaiKhoan) cout<<"So du khong du de chuyen, vui long nhap so du nho hon "<<a.soDuTaiKhoan<<endl;
+    if(tien>a.soDuTaiKhoan) cout<<"So du khong du de chuyen, vui long nhap so du nho hon "; inSodu(a.soDuTaiKhoan); cout<<endl;
   } while (tien>a.soDuTaiKhoan);
   cout<<"Giao dich dang xu li. Giao dich thanh cong!";
   a.soDuTaiKhoan-=tien;
   client[x].soDuTaiKhoan += tien;
+  cout<<"So tien con lai la: "; inSodu(a.soDuTaiKhoan);
   saveListClient(client);
   client = getListClient();
 }
 
 void napTien(CLIENT& a){
-  double tien;
+  long long tien;
   cout<<"Nhap so tien muon nap: "; cin>>tien;
   a.soDuTaiKhoan+=tien;
-  cout<<"Ban da nap thanh cong! So du hien tai la: "<<a.soDuTaiKhoan<<endl;
+  cout<<"Ban da nap thanh cong! So du hien tai la: "; inSodu(a.soDuTaiKhoan);
   saveListClient(client);
   client = getListClient();
 }
 
 void rutTien(CLIENT& a){
-  double tien;
+  long long tien;
   do
   {
     cout<<"Nhap so tien muon rut: "; cin >>tien;
     if(tien>a.soDuTaiKhoan) cout<<"So du khong du de rut, vui long nhap so du nho hon "<<a.soDuTaiKhoan<<endl;
   } while (tien>a.soDuTaiKhoan);
   a.soDuTaiKhoan-=tien;
-  cout<<"Ban da rut thanh cong! So du hien tai la: "<<a.soDuTaiKhoan<<endl;
+  cout<<"Ban da rut thanh cong! So du hien tai la: "; inSodu(a.soDuTaiKhoan);
   saveListClient(client);
   client = getListClient();
 }
@@ -172,20 +214,7 @@ void log_in(){
   char mk[256];
   fflush(stdin);
   cout<<"\nTen Dang Nhap: "; cin.getline(tendn,256);
-  
-  	int i = 0;
-   char ch;
-   cout << "Nhap mat khau: ";
-   ch = _getch();
-   while(ch != 13){//character 13 is enter
-      mk[i] = ch;
-      i ++;
-      cout << '*';
-      ch = _getch();
-   }
-  
-  
-  
+  cout<<"Mat Khau: "; cin.getline(mk,256);
   if(check(tendn,mk)){
         int vt=check(tendn,mk);
         int s=1;
@@ -311,43 +340,6 @@ void deleteCLient(int i) {
 	taoID();
     
 	
-}
-
-void inSodu(long long a ){
-  long long n=a;
-  int d=0;
-  while (n>0)
-  {
-    n/=10;
-    d++;
-  }
-  int arr[d+1];
-  n=a;
-  for (int i = 1; i <= d; i++) {
-    arr[i]=n%10;
-    n/=10;
-  }
-  if(d%3==0){
-    for (int i = 1; i <= d; i++)
-   {
-     cout<<arr[d-i+1];
-     if(i%3==0 && i<d) cout<<".";
-   }
-   cout<<endl;
-  }
-  else{
-    for (int i = d; i > d-d%3; i--){
-      cout<<arr[i];
-    }
-    cout<<".";
-    int t=d-d%3;
-     for (int i = 1; i <= t; i++)
-   {
-     cout<<arr[t-i+1];
-     if(i%3==0 && i< t) cout<<".";
-   }
-   cout<<endl;
-  }
 }
 
 #endif
