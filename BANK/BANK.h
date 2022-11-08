@@ -1,3 +1,5 @@
+
+
 #ifndef BANK_H
 #define BANK_H
 
@@ -39,37 +41,57 @@ public:
   double soDuTaiKhoan;
   char taiKhoan[256];
   char matKhau[256];
+  char email[256];
+  char ngaySinh[256];
 public:
   friend istream &operator>>(istream &is, CLIENT &p) {
     fflush(stdin);
-  	cout << "Nhap ten dang nhap: ";
-  	cin.getline(p.taiKhoan, 256);
-  	cout << "Nhap mat khau: ";
-  	cin.getline(p.matKhau, 256);
+    
     cout << "Nhap ten: ";
     cin.getline(p.hoTen, 256);
-    cout << "Nhap dia chi: ";
-    cin.getline(p.diaChi, 256);
+    
+    cout << "Nhap dia chi email: ";
+    cin.getline(p.email, 256);
+    
     cout << "Nhap so dien thoai: ";
     cin.getline(p.soDienThoai, 256);
+    
     cout << "Nhap can cuoc cong dan: ";
     cin.getline(p.cccd, 256);
+    
+    cout << "Nhap dia chi: ";
+    cin.getline(p.diaChi, 256);
+    
+    cout << "Nhap ngay sinh (dd-mm-yy): ";
+    cin.getline(p.ngaySinh, 256);
+    
+  	cout << "Nhap ten dang nhap: ";
+  	cin.getline(p.taiKhoan, 256);
+  	
+  	cout << "Nhap mat khau: ";
+  	cin.getline(p.matKhau, 256);
+  	
+  	do {
+        cout << "Xac nhan mat khau: ";
+        char temp[256];
+        cin.getline(temp, 256);
+        if (strcmp(temp, p.matKhau) == 0) {
+            break;
+        } else {
+            cout << "\n\n!!!Mat khau xac nhan khong chinh xac!!!" << endl;
+            cout << "!!!Vui long xac nhan lai mat khau!!!\n" << endl;
+        }
+    } while (1);
+    
+    
+    
+    
     p.maSoThe = 10000000 + id;
     p.soDuTaiKhoan = 0;
     p.idd = id;
     return is;
   }
   
-  friend ostream& operator << (ostream& os, CLIENT &p) {
-  	cout << "|" << setw(3)  << left  << p.idd;
-  	cout << "|" << setw(14) << left  << p.maSoThe;
-  	cout << "|" << setw(22) << left  << p.hoTen;
-  	cout << "|" << setw(22) << left  << p.diaChi;
-  	cout << "|" << setw(16) << left  << p.soDienThoai;
-  	cout << "|" << setw(14) << left  << p.cccd;
-  	cout << "|" << setw(16) << left  << p.soDuTaiKhoan << endl;
-    return os;
-  }
   
 };
 
@@ -87,13 +109,17 @@ void moTaiKhoan() {
   f.close();
   client = getListClient();
 }
-void xuatTT(CLIENT& a){
+void xuatTT(CLIENT& p){
 
-  cout<<"Ten khach hang: "<<a.hoTen<<endl;
-  cout<<"Dia chi: "<<a.diaChi<<endl;
-  cout<<"So dien thoai: "<<a.soDienThoai<<endl;
-  cout<<"So tai khoan: "<<a.maSoThe<<endl;
-  cout<<"So can cuoc cong dan: "<<a.cccd<<endl;
+  cout<<"So tai khoan: "<<p.maSoThe<<endl;
+  cout<<"Ten dang nhap: "<<p.taiKhoan<<endl;
+  cout<<"Ho va ten: "<<p.hoTen<<endl;
+  cout<<"So dien thoai: "<<p.soDienThoai<<endl;
+  cout<<"So can cuoc cong dan: "<<p.cccd<<endl;
+  cout << "Dia chi: " << p.diaChi << endl;
+  cout << "Ngay sinh: " << p.ngaySinh << endl; 
+  cout << "Email: " << p.email << endl;
+  
 } 
 
 void xuatSodu(CLIENT& a){
@@ -167,7 +193,7 @@ int check(char* tendn, char* mk){
   return 0;
 }
 
-void log_in(){
+int log_in(){
   char tendn[256];
   char mk[256];
   fflush(stdin);
@@ -184,60 +210,10 @@ void log_in(){
       ch = _getch();
    }
   
+  return check(tendn,mk);
   
   
-  if(check(tendn,mk)){
-        int vt=check(tendn,mk);
-        int s=1;
-        do
-        {
-        	system("cls");
-            cout<<"\n1.Thong tin tai khoan."<<endl;;
-            cout<<"2.So du tai khoan."<<endl;
-            cout<<"3.Chuyen khoan"<<endl;
-            cout<<"4.Nap tien."<<endl;
-            cout<<"5.Rut tien."<<endl;
-            cout<<"6.Cac dich vu lien quan den the."<<endl;
-            cout<<"7.Cac dich vu khac (Thanh toan hoa don, Tien dien, Tien nuoc,...)"<<endl;
-            cout <<"0.Dang Xuat" << endl;
-			cin >> s; 
-            switch (s)
-            {
-                case 1: 
-                system("cls");
-				xuatTT(client[vt]);
-				system("pause");
-                break;
-                case 2:
-                system("cls");
-				xuatSodu(client[vt]);
-				system("pause");
-                break;
-                case 3:
-                system("cls");
-				chuyenkhoan(client[vt]);
-				system("pause");
-                break;
-                case 4:
-                system("cls");
-				napTien(client[vt]);
-				system("pause");
-                break;
-                case 5: 
-                system("cls");
-				rutTien(client[vt]);
-				system("pause");
-                break;
-                case 6: dichvuThe(client[vt]);
-                break;
-                case 7: dichvuKhac(client[vt]);
-                break;
-                default: s = 0;
-          }
-        } while(s);
-        return;
-      }
-  cout<<"Tai khoan va mat khau chua chinh xac! Vui long nhap lai!"<<endl;
+  
 }
 
 CLIENT* getListClient() {
@@ -289,20 +265,7 @@ void taoID() {
   f.close();
 }
 
-void showListClient(CLIENT* client) {
-	cout << "\t\t\t\t\tDanh Sach Tai Khoan\t\t\t\t\t" << endl << endl;
-	cout << "|" << setw(3)  << left  << "ID";
-  	cout << "|" << setw(14) << left  << "Ma so the";
-  	cout << "|" << setw(22) << left  << "Ho ten";
-  	cout << "|" << setw(22) << left  << "Dia chi";
-  	cout << "|" << setw(16) << left  << "So dien thoai";
-  	cout << "|" << setw(14) << left  << "CCCD";
-  	cout << "|" << setw(16) << left  << "So du tai khoan" << endl;
-	for(int i=1; i<=number; i++){
-		cout << client[i];
-	}
-	cout << endl;
-}
+
 
 void deleteCLient(int i) {
       saveListClient(client, i);
