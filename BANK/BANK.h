@@ -28,6 +28,13 @@ bool confirmMessage ();
 int ConfirmPin(int a);
 void inSodu(long long a);
 
+// -----------------  Lich su giao dich  --------------------------------
+
+void saveTransaction (char* x, char* path);	//Luu lich su giao dich, (char* x): lich su giao dich can luu, (char* path): duong dan file
+
+void exportTransaction (char* path);		//In lich su giao dich, (char* path): duong dan file  
+
+// -----------------  End Lich su giao dich  ----------------------------
 
 class CLIENT {
 public:
@@ -451,4 +458,27 @@ int ConfirmPin(int a){
     if(a==pin) return 1;
     else return 0;
 }
+
+// ------------------------------------------------------------------------------------
+
+void saveTransaction (char* x, char* path) {
+	fstream f;
+	f.open(path, ios::out | ios::app);
+	f << x;
+	f.close();
+} 
+
+void exportTransaction (char* path) {
+	fstream f;
+	f.open(path, ios::in);
+	char temp[256];
+	while (!f.eof()) {
+		f.getline(temp, 255);
+		cout << temp << endl;
+	}
+	f.close();
+}
+
+// -------------------------------------------------------------------------------------
+
 #endif
