@@ -1,5 +1,3 @@
-
-
 #ifndef BANK_H
 #define BANK_H
 
@@ -27,8 +25,8 @@ CLIENT* getListClient();//Lay du lieu trong file va tra ve mang du lieu
 void saveListClient(CLIENT* client);//luu du lieu vao file
 void showListClient(CLIENT* client);
 bool confirmMessage (); 
-
-
+int ConfirmPin(int a);
+void inSodu(long long a);
 
 
 class CLIENT {
@@ -44,6 +42,7 @@ public:
   char matKhau[256];
   char email[256];
   char ngaySinh[256];
+  int PIN;
 public:
   friend istream &operator>>(istream &is, CLIENT &p) {
     fflush(stdin);
@@ -82,17 +81,25 @@ public:
             cout << "\n\n!!!Mat khau xac nhan khong chinh xac!!!" << endl;
             cout << "!!!Vui long xac nhan lai mat khau!!!\n" << endl;
         }
+    } while(1);
+    cout<<"Nhap ma pin moi: "; cin>>p.PIN;
+    do {
+        cout << "Xac nhan ma pin: ";
+        int t;
+        cin>>t;
+        if (t==p.PIN) {
+            break;
+        } else {
+            cout << "\n\n!!!Ma pin xac nhan khong chinh xac!!!" << endl;
+            cout << "!!!Vui long xac nhan lai ma pin!!!\n" << endl;
+        }
     } while (1);
-    
-    
-    
     
     p.maSoThe = 10000000 + id;
     p.soDuTaiKhoan = 0;
     p.idd = id;
     return is;
   }
-  
   
 };
 
@@ -137,12 +144,16 @@ void xuatSodu(CLIENT& a){
 
 void chuyenkhoan(CLIENT& a){
   char bank[256];
-  int stk;
-  double tien;
-  cout<<"Chon ngan hang ban muon chuyen toi: "; 
-  fflush(stdin);
-  cin.getline(bank,256);
-  cout<<"Nhap so tai khoan ma ban muon chuyen toi: "; 
+  int stk,s;
+  long long tien;
+  cout<<"Vui long chon hinh thuc chuyen tien:"<<endl;
+  cout<<"1.Chuyen noi bo."<<endl;
+  cout<<"2.Chuyen lien ngan hang."<<endl;
+  cin >> s;
+  switch (s)
+  {
+  case 1:
+    cout<<"  Nhap so tai khoan ma ban muon chuyen toi: "; 
   cin >> stk;
   
   int x;
@@ -154,28 +165,74 @@ void chuyenkhoan(CLIENT& a){
   }
   do
   {
-    cout<<"Nhap so tien muon chuyen: "; cin >>tien;
-    if(tien>a.soDuTaiKhoan) cout<<"So du khong du de chuyen, vui long nhap so du nho hon "<<a.soDuTaiKhoan<<endl;
+    cout<<"  Nhap so tien muon chuyen: "; cin >>tien;
+    if(tien>a.soDuTaiKhoan) cout<<"  So du khong du de chuyen, vui long nhap so du nho hon "<<a.soDuTaiKhoan<<endl;
   } while (tien>a.soDuTaiKhoan);
-  
+  if(ConfirmPin(a.PIN)==1){
   if (confirmMessage() ) {
+    if(a.soDuTaiKhoan<=50000){
+      cout<<"So du quy khach nho hon 50K, vui long nap them tien vao tai khoan de thuc hien giao dich!"<<endl;
+    }
+    else{
   	a.soDuTaiKhoan-=tien;
   	client[x].soDuTaiKhoan += tien;
+  	
+  	
+  	
+    cout<<"Giao dich thanh cong! So du hien tai cua quy khach la: "; inSodu(a.soDuTaiKhoan);
   	saveListClient(client);
   	client = getListClient();
-  } else {
+  	char x[300];
+	  sprintf(x,"TK: %d  Giao Dich: - %d ", a.maSoThe,tien); 
+	  cout << x;
+    }
+  } 
+  else {
   	return;
   }
+  }
+  break;
   
+  case 2:
+  cout<<"Nhap ngan hang ban muon chuyen toi:"; 
+  cin.getline(bank,256);
+  cout<<"  Nhap so tai khoan ma ban muon chuyen toi: "; 
+  cin >> stk;
+  do
+  {
+    cout<<"  Nhap so tien muon chuyen: "; cin >>tien;
+    if(tien>a.soDuTaiKhoan) cout<<"  So du khong du de chuyen, vui long nhap so du nho hon "<<a.soDuTaiKhoan<<endl;
+  } while (tien>a.soDuTaiKhoan);
+  
+  if(ConfirmPin(a.PIN)==1){
+  if (confirmMessage() ) {
+    if(a.soDuTaiKhoan<=50000){
+      cout<<"So du quy khach nho hon 50K, vui long nap them tien vao tai khoan de thuc hien giao dich!"<<endl;
+    }
+    else{
+  	a.soDuTaiKhoan=a.soDuTaiKhoan-tien-0.02*tien;
+    cout<<"Giao dich thanh cong! So du hien tai cua quy khach la: "; inSodu(a.soDuTaiKhoan);
+    cout<<" (Da tru 2% phi giao dich)";
+  	saveListClient(client);
+  	client = getListClient();
+    }
+  } 
+  else {
+  	return;
+  }
+  }
+    break;
+  }
   
 }
 
 void napTien(CLIENT& a){
-  double tien;
-  cout<<"Nhap so tien muon nap: "; cin>>tien;
+  long long tien;
+  cout<<"  Nhap so tien muon nap: "; cin>>tien;
   if (confirmMessage() ) {
   	a.soDuTaiKhoan+=tien;
-  	cout<<"Ban da nap thanh cong! So du hien tai la: "<<a.soDuTaiKhoan<<endl;
+  	cout<<"\n  Ban da nap thanh cong! So du hien tai la: "; inSodu(a.soDuTaiKhoan);
+  	cout << "\n  ";
   	saveListClient(client);
   	client = getListClient();
   }	else {
@@ -185,25 +242,51 @@ void napTien(CLIENT& a){
 }
 
 void rutTien(CLIENT& a){
-  double tien;
+  long long tien;
   do
   {
-    cout<<"Nhap so tien muon rut: "; cin >>tien;
-    if(tien>a.soDuTaiKhoan) cout<<"So du khong du de rut, vui long nhap so du nho hon "<<a.soDuTaiKhoan<<endl;
+  	xuatSodu(a);
+  	
+    cout<<"  Nhap so tien muon rut: "; cin >>tien;
+    if(tien>a.soDuTaiKhoan) cout<<"  So du khong du de rut, vui long nhap so du nho hon "; inSodu(a.soDuTaiKhoan);
   } while (tien>a.soDuTaiKhoan);
+  if(ConfirmPin(a.PIN)==1){
   if (confirmMessage() ) {
   	a.soDuTaiKhoan-=tien;
-  	cout<<"Ban da rut thanh cong! So du hien tai la: "<<a.soDuTaiKhoan<<endl;
+  	cout<<"\n  Ban da rut thanh cong! So du hien tai la: "; inSodu(a.soDuTaiKhoan);
+  	cout << "\n  ";
   	saveListClient(client);
   	client = getListClient();
+  	
+  	
+  	
+  	
+  	
   } else {
   	return;
   }
-  
+  }
 }
 
-void dichvuThe(CLIENT& a){
-  cout<<"Comming soon!";
+void doiMapin(CLIENT& a){
+  char mk[258];
+  int pin;
+  do
+  {
+    cout<<"Vui long nhap mat khau: ";
+    cin.getline(mk,258);
+    if(strcmp(mk, a.matKhau) == 0) break;
+  } while (1);
+  do
+  {
+    cout<<"Vui long nhap ma pin cu: ";
+    cin >>pin;
+    if(pin==a.PIN) break;
+  } while (1);
+  cout<<"Nhap ma pin moi: ";
+  cin>>a.PIN;
+  if(confirmMessage()) cout<<"Thay doi ma pin thanh cong!"<<endl;
+  else cout<<"Thay doi ma pin khong thanh cong!"<<endl;
 }
 
 void dichvuKhac(CLIENT& a){
@@ -213,7 +296,11 @@ void dichvuKhac(CLIENT& a){
 int check(char* tendn, char* mk){
   for (int i = 1; i <= number; i++)
   {
-    if(strcmp(client[i].taiKhoan,tendn)==0 && strcmp(client[i].matKhau, mk)==0)	return i;
+    if(strcmp(client[i].taiKhoan,tendn)==0 && strcmp(client[i].matKhau, mk)==0){
+    	
+    	return i;	
+	}	
+	
   }
   return 0;
 }
@@ -222,18 +309,19 @@ int log_in(){
   char tendn[256];
   char mk[256];
   fflush(stdin);
-  cout<<"\nTen Dang Nhap: "; cin.getline(tendn,256);
+  system("cls");
+  cout << "\n  Ten Dang Nhap: "; cin.getline(tendn,256);
   
   	int i = 0;
-   char ch;
-   cout << "Nhap mat khau: ";
-   ch = _getch();
-   while(ch != 13){//character 13 is enter
+    char ch;
+    cout << "  Mat khau: ";
+    ch = _getch();
+    while(ch != 13){//character 13 is enter
       mk[i] = ch;
       i ++;
       cout << '*';
       ch = _getch();
-   }
+    }
   
   return check(tendn,mk);
   
@@ -340,14 +428,15 @@ void inSodu(long long a ){
 
 bool confirmMessage () {
 	system("cls");
-	cout << "------------------------------" << endl;
-	cout << "=!!!  Xac nhan giao dich!!!  =" << endl;
-	cout << "------------------------------" << endl;
+	cout << "  +------------------------------+" << endl;
+	cout << "  | !!!  Xac nhan giao dich  !!! |" << endl;
+	cout << "  +------------------------------+" << endl;
 	cout << "\n";
-	cout << "1: Xac nhan" << endl;
-	cout << "0: Tu choi" << endl;
+	cout << "  1: Xac nhan" << endl;
+	cout << "  0: Tu choi" << endl;
 	
 	bool select;
+	cout << "  Nhap lua chon: ";
 	cin >> select;
 	
 	system("cls");
@@ -355,5 +444,11 @@ bool confirmMessage () {
 	if (select == 1)	return 1;
 	else 				return 0;
 }
-
+int ConfirmPin(int a){
+    int pin;
+    cout<<"Vui long nhap ma pin de xac nhan giao dich: ";
+    cin >>pin;
+    if(a==pin) return 1;
+    else return 0;
+}
 #endif

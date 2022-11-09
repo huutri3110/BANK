@@ -19,16 +19,16 @@ void menu_main(){
     {
     	system("cls");
     	cout <<"********************************************************************" << endl;
-    	cout <<"****                                                            ****" << endl;
-    	cout <<"****         Welcome to T.V Bank- Bank of VietNam               ****" << endl;
-    	cout <<"****                                                            ****" << endl;
+    	cout <<"**                                                                **" << endl;
+    	cout <<"**           Welcome to T.V Bank- Bank of VietNam                 **" << endl;
+    	cout <<"**                                                                **" << endl;
     	cout <<"********************************************************************" << endl;
     	cout << "\n";
         cout<<"  1.Dang Nhap"<<endl;
         cout<<"  2.Dang ki tai khoan"<<endl;
         cout<<"  3.Lien he dich vu CSKH"<<endl;
         cout<<"  0.Thoat ngan hang"<<endl;
-        cout<<"  Nhap lua chon cua ban: "; cin>>s;
+        cout<<"\n  Nhap lua chon cua ban: "; cin>>s;
         
         switch (s)
         {
@@ -36,7 +36,6 @@ void menu_main(){
             cout<<endl;
             
             vt = log_in();
-            cout << vt;
             
             if (vt) {
             	int s=1;
@@ -45,9 +44,9 @@ void menu_main(){
         	system("cls");
         	
         	cout <<"********************************************************************" << endl;
-    		cout <<"****                                                            ****" << endl;
-        	cout <<"****                 Welcome" << " " << setw(35) << left << client[vt].hoTen << "****" << endl;
-    		cout <<"****                                                            ****" << endl;
+    		cout <<"**                                                                **" << endl;
+        	cout <<"**                   Welcome" << " " << setw(35) << left << client[vt].hoTen << "  **" << endl;
+    		cout <<"**                                                                **" << endl;
     		cout <<"********************************************************************" << endl;
             cout<<"\n  1.Thong tin tai khoan."<<endl;;
             cout<<"  2.So du tai khoan."<<endl;
@@ -57,6 +56,7 @@ void menu_main(){
             cout<<"  6.Cac dich vu lien quan den the."<<endl;
             cout<<"  7.Cac dich vu khac (Thanh toan hoa don, Tien dien, Tien nuoc,...)"<<endl;
             cout<<"  0.Dang Xuat" << endl;
+            cout << "\n  Nhap lua chon: ";
 			cin >> s; 
             switch (s)
             {
@@ -85,7 +85,7 @@ void menu_main(){
 				rutTien(client[vt]);
 				system("pause");
                 break;
-                case 6: dichvuThe(client[vt]);
+                case 6: doiMapin(client[vt]);
                 break;
                 case 7: dichvuKhac(client[vt]);
                 break;
@@ -119,9 +119,11 @@ int main() {
 
 	
 	 menu_main();
+
 	
  	 
 
 	
 	taoID();
 }
+
