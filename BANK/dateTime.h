@@ -1,23 +1,40 @@
-
+#ifndef dateTime_H
+#define dateTime_H
 
 #include <iostream>
 #include <ctime>
+class dateTime{
+    private:
+    int year;
+    int mon;
+    int day;
+    int hour;
+    int min;
+    public:
+        dateTime(){
+             time_t now = time(0);
+            tm *ltm = localtime(&now);
+            year= 1900 + ltm->tm_year;
+            mon= 1 + ltm->tm_mon;
+            day=  ltm->tm_mday ;
+            min=  1 + ltm->tm_min;
+            hour= 1 + ltm->tm_hour;
+        }
+        int getYear(){
+            return year;
+        }
+        int getMon(){
+            return mon;
+        }
+        int getDay(){
+            return day;
+        }
+        int getHour(){
+            return hour;
+        }
+        int getMin(){
+            return min;
+        }
+};
 
-using namespace std;
-
-int main() {
-   // th?i gian hi?n t?i tính theo h? th?ng
-   time_t now = time(0);
-
-   cout << "Number of sec since 1/1/1970:" << now << endl;
-
-   tm *ltm = localtime(&now);
-
-   // in ra các thành ph?n c?a c?u trúc tm struct
-   cout << "Year: " << 1900 + ltm->tm_year << endl;
-   cout << "Month: "<< 1 + ltm->tm_mon<< endl;
-   cout << "Day: "<<  ltm->tm_mday << endl;
-   cout << "Time: "<< 1 + ltm->tm_hour << ":";
-   cout << 1 + ltm->tm_min << ":";
-   cout << 1 + ltm->tm_sec << endl;
-}
+#endif
