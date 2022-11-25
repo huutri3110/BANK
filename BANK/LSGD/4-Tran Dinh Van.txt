@@ -1,0 +1,26 @@
+ TK: 10000004 
+ GD: +123123213 9/11/2022 24:41 
+ Hinh thuc: Nap Tien 
+ ND: Nap tien vao tai khoan 
+ Ma GD: 7460000
+_ TK: 10000004 
+ GD: -123 9/11/2022 24:41 
+ Hinh thuc: Rut Tien 
+ ND: Rut tien tu tai khoan 4 
+ Ma GD: 7690000
+_ TK: 10000004 
+ GD: -123 9/11/2022 24:41 
+ Hinh thuc: Chuyen Khoan 
+ ND: 12321 
+ Ma GD: 7920000
+_ TK: 10000004 
+ GD: +213213 9/11/2022 24:44 
+ Hinh thuc: Nap Tien 
+ ND: Nap tien vao tai khoan 
+ Ma GD: 13960000
+_ TK: 10000004 
+ GD: +3213 9/11/2022 23:46 
+ Hinh thuc: Nap Tien 
+ ND: Nap tien vao tai khoan 
+ Ma GD: 19610000
+_

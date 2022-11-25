@@ -1,0 +1,26 @@
+ TK: 10000013 
+ GD: +50000 16/11/2022 12:2 
+ Hinh thuc: Chuyen Khoan 
+ ND:  
+ Ma GD: 40670000
+_ TK: 10000013 
+ GD: +100000 16/11/2022 12:9 
+ Hinh thuc: Chuyen Khoan 
+ ND:  
+ Ma GD: 53700000
+_ TK: 10000013 
+ GD: +100000 16/11/2022 12:11 
+ Hinh thuc: Chuyen Khoan 
+ ND: Hello em yeu 
+ Ma GD: 57580000
+_ TK: 10000013 
+ GD: +100000 16/11/2022 12:12 
+ Hinh thuc: Chuyen Khoan 
+ ND: hello babe 
+ Ma GD: 60980000
+_ TK: 10000013 
+ GD: +4000 16/11/2022 21:46 
+ Hinh thuc: Chuyen Khoan 
+ ND: hello anh em 
+ Ma GD: 201460000
+_
