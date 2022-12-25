@@ -1,0 +1,12 @@
+ TK:1000000001
++10.000.000 VND
+25/12/2022 21:31
+Nap Tien
+Nap tien vao tai khoan
+Ma GD: 2100000001
+ TK:1000000001
+-100.000 VND
+25/12/2022 21:32
+Chuyen Khoan
+Tran Duy Thuc chuyen tien
+Ma GD: 1100000002
