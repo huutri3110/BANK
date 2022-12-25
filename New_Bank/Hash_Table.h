@@ -62,14 +62,7 @@ unsigned long long hashTable<T>::insert (unsigned long long key, T value) {
 	unsigned long long i = 0;
 	unsigned long long j = this->hashFunc2(key);
 	unsigned long long idx = key;
-	cout << "KeyDount: " << keyCount << endl;
-	cout << "key: " << key << endl;
-	cout << "idx: " << idx << endl;
 	do {
-		cout << "hash: " << this->hashFunc(key) << endl;
-		cout << "hashnew: " << this->hashFunc(key) + i*j << endl;
-		idx = this->hashFunc(key) + i*j;
-		cout << "idx: " << idx << endl;
 		if (idx >= this->keyCount) {
 			idx = idx % this->keyCount;
 		}
@@ -195,26 +188,19 @@ unsigned long long hashTable<T>::find (unsigned long long key) {
 	unsigned long long i = 0;
 	unsigned long long j = this->hashFunc2(key);
 	unsigned long long idx = key;
-	cout << "Key: " << key << endl;
-	cout << "Idx: " << idx << endl;
 	
 	do {
 		idx = this->hashFunc(key) + i*j; 
-		cout << "hash: " << this->hashFunc(key) << endl;
-		cout << "hashNew: " << this->hashFunc(key) + i*j << endl;
-		cout << "idx: " << idx << endl;
 		if (idx >= this->keyCount) {
 			idx = idx % this->keyCount;
 			
 		}
-				cout << "i: " << i << " " << endl;
 		i++;
 
 		if (listValue[idx].dta == 0) {
 			return -1;
 		};
 	} while (listValue[idx].dta != key);
-	cout << "tim tahy: " << idx << endl;
 	return idx;
 }
 
